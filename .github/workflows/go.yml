@@ -64,10 +64,10 @@ jobs:
     - name: run backend
       run: |
         cd backend
-        go run backend 
+        go run backend &
         
     - name: run frontend
       run: |
         cd frontend
-        go run frontend
+        go run frontend &
         
