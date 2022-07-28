@@ -58,16 +58,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Download Backend Artifact
+    - name: Download Artifacts
       uses: actions/download-artifact@v3.0.0
-      with:
-        name: backend
-    
-    - name: Download Frontend Artifact
-      uses: actions/download-artifact@v3.0.0
-      with:
-        name: frontend
-    
+
     - name: run backend
       run: |
         cd backend
