@@ -51,23 +51,30 @@ jobs:
         if-no-files-found: error
         retention-days: 1
     
-  run:
+  deploy:
     needs: build
 #    runs-on: ubuntu-latest
     runs-on: self-hosted
+    environment: 
+      name: fortune-cookie-env
+      url: http://http://34.241.166.1
+    
     steps:
     - uses: actions/checkout@v3
 
     - name: Download Artifacts
       uses: actions/download-artifact@v3.0.0
 
-    - name: run backend
-      run: |
-        cd backend
-        go run backend &
-        
-    - name: run frontend
-      run: |
-        cd frontend
-        go run frontend &
+    - name: running application
+      run: ./app.sh
+      
+#    - name: run backend
+#      run: |
+#        cd backend
+#        go run backend &
+#        
+#    - name: run frontend
+#      run: |
+#        cd frontend
+#        go run frontend &
         
