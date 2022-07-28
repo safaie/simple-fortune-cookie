@@ -56,8 +56,8 @@ jobs:
 #    runs-on: ubuntu-latest
     runs-on: self-hosted
     environment: 
-      name: fortune-cookie-env
-      url: http://http://34.241.166.1
+      name: fortune-cookie
+      url: http://http://34.241.166.1:8080
     
     steps:
     - uses: actions/checkout@v3
@@ -67,14 +67,4 @@ jobs:
 
     - name: running application
       run: ./app.sh
-      
-#    - name: run backend
-#      run: |
-#        cd backend
-#        go run backend &
-#        
-#    - name: run frontend
-#      run: |
-#        cd frontend
-#        go run frontend &
-        
+
