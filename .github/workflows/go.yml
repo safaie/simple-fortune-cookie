@@ -19,7 +19,6 @@ jobs:
       with:
         go-version: 1.18
         
-
     - name: Build Backend
       run: |
         cd backend
@@ -35,20 +34,40 @@ jobs:
       run: |
         cd frontend
         go test -v
-
+        
+    - name: Upload Backend Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: backend
+        path: backend/
+        if-no-files-found: error
+        retention-days: 1
+    
+    - name: Upload Frontend Artifact
+      uses: actions/upload-artifact@v3.1.0
+      with:
+        name: frontend
+        path: frontend/
+        if-no-files-found: error
+        retention-days: 1
+    
   run:
+    needs: build
 #    runs-on: ubuntu-latest
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
 
+    - name: Download Artifacts
+      uses: actions/download-artifact@v3.0.0
+
     - name: run backend
       run: |
         cd backend
-        go run backend 
+        go run backend &
         
     - name: run frontend
       run: |
         cd frontend
-        go run frontend
+        go run frontend &
         
