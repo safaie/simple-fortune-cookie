@@ -9,8 +9,8 @@ on:
 jobs:
 
   build:
-#    runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+#    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
 
@@ -53,8 +53,8 @@ jobs:
     
   deploy:
     needs: build
-#    runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+#    runs-on: self-hosted
     environment: 
       name: fortune-cookie-staging
       url: http://34.241.166.1:8080
