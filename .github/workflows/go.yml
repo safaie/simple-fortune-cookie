@@ -56,8 +56,8 @@ jobs:
 #    runs-on: ubuntu-latest
     runs-on: self-hosted
     environment: 
-      name: fortune-cookie
-      url: http://34.241.166.1:8080
+      name: simple-fortune-cookie
+      url: http://3.248.188.227:8080
     
     steps:
     - uses: actions/checkout@v3
