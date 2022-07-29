@@ -5,12 +5,13 @@ on:
     branches: [ "features/*" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
 
   build:
-#    runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+#    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
 
@@ -51,23 +52,20 @@ jobs:
         if-no-files-found: error
         retention-days: 1
     
-  run:
-    needs: build
+#  deploy:
+#    needs: build
 #    runs-on: ubuntu-latest
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v3
+##    runs-on: self-hosted
+#    environment: 
+#      name: fortune-cookie-staging
+#      url: http://34.241.166.1:8080
+#    
+#    steps:
+#    - uses: actions/checkout@v3
+#
+#    - name: Download Artifacts
+#      uses: actions/download-artifact@v3.0.0
+#
+#    - name: running application
+#      run: ./app.sh
 
-    - name: Download Artifacts
-      uses: actions/download-artifact@v3.0.0
-
-    - name: run backend
-      run: |
-        cd backend
-        go run backend &
-        
-    - name: run frontend
-      run: |
-        cd frontend
-        go run frontend &
-        
