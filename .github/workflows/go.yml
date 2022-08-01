@@ -76,5 +76,5 @@ jobs:
         # Path to the Dockerfile
         file: backend/Dockerfile
         push: true
-#        tags: masdockerid/backend:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/backend:latest
 
