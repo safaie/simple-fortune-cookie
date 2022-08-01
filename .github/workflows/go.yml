@@ -76,5 +76,5 @@ jobs:
         # Path to the Dockerfile
         file: backend/Dockerfile
         push: true
-        tags: academy/backend:latest
+        tags: masdockerid/backend:latest
 
