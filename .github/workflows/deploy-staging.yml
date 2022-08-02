@@ -5,9 +5,10 @@ on:
     types: [labeled]
 
 env:
-  DOCKER_IMAGE_NAME: backend
+  BACKEND_IMAGE_NAME: backend
+  FRONTEND_IMAGE_NAME: frontend
   IMAGE_REGISTRY_URL: docker.pkg.github.com
-  AZURE_WEBAPP_NAME: academy-app
+  AZURE_WEBAPP_NAME: fortune-cookie-app
 
 jobs:
 
@@ -34,7 +35,9 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{env.AZURE_WEBAPP_NAME}}
-          images: ${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.DOCKER_IMAGE_NAME}}:latest
+          images: |
+            ${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.BACKEND_IMAGE_NAME}}:latest
+            ${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.FRONTEND_IMAGE_NAME}}:latest
 
       - name: Azure logout
         run: |
