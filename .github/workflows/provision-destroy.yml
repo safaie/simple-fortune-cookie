@@ -9,8 +9,7 @@ env:
   AZURE_APP_PLAN: academy
   AZURE_LOCATION: '"North Europe"'
   AZURE_WEBAPP_NAME: academy-app
-  BACKEND_IMAGE: backend
-  FRONTEND_IMAGE: frontend
+  CONTAINER_IMAGE: backend
 
 jobs:
   setup-up-azure-resources:
@@ -40,22 +39,22 @@ jobs:
       - name: Create webapp resource
         if: success()
         run: |
-          az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }}  --deployment-container-image-name ${{ env.BACKEND_IMAGE }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }} --multicontainer-config-type compose --multicontainer-config-file compose.yml
 
-      - name: Create webapp resource
-        if: success()
-        run: |
-          az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }}  --deployment-container-image-name ${{ env.FRONTEND_IMAGE }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
+#      - name: Create webapp resource
+#        if: success()
+#        run: |
+#          az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }}  --deployment-container-image-name ${{ env.CONTAINER_IMAGE }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
+
+#      - name: Configure webapp to use GitHub Packages
+#        if: success()
+#        run: |
+#          az webapp config container set --docker-custom-image-name ${{ env.CONTAINER_IMAGE }} --docker-registry-server-password ${{secrets.GITHUB_TOKEN}} --docker-registry-server-url https://docker.pkg.github.com --docker-registry-server-user ${{github.actor}} --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
 
       - name: Configure webapp to use GitHub Packages
         if: success()
         run: |
-          az webapp config container set --docker-custom-image-name ${{ env.BACKEND_IMAGE }} --docker-registry-server-password ${{secrets.GITHUB_TOKEN}} --docker-registry-server-url https://docker.pkg.github.com --docker-registry-server-user ${{github.actor}} --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
-
-      - name: Configure webapp to use GitHub Packages
-        if: success()
-        run: |
-          az webapp config container set --docker-custom-image-name ${{ env.FRONTEND_IMAGE }} --docker-registry-server-password ${{secrets.GITHUB_TOKEN}} --docker-registry-server-url https://docker.pkg.github.com --docker-registry-server-user ${{github.actor}} --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          az webapp config container set --multicontainer-config-file --multicontainer-config-type COMPOSE --docker-registry-server-password ${{secrets.GITHUB_TOKEN}} --docker-registry-server-url https://docker.pkg.github.com --docker-registry-server-user ${{github.actor}} --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
 
   destroy-azure-resources:
     runs-on: ubuntu-latest
