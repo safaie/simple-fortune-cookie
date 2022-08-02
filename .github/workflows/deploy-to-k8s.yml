@@ -30,10 +30,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Azure logout
-        run: |
-          az logout
-
       - name: Deploy to Kubernetes cluster
         uses: Azure/k8s-deploy@v4
         with:
@@ -59,4 +55,8 @@ jobs:
           force: true
           # Github token
           token: # default is ${{ github.token }}
+
+      - name: Azure logout
+        run: |
+          az logout
 
