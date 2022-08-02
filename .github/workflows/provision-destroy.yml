@@ -6,9 +6,9 @@ on:
 
 env:
   AZURE_RESOURCE_GROUP: alius-probatio-rg
-  AZURE_APP_PLAN: academy
+  AZURE_APP_PLAN: devops-academy
   AZURE_LOCATION: '"North Europe"'
-  AZURE_WEBAPP_NAME: academy-app
+  AZURE_WEBAPP_NAME: devops-academy-app
   CONTAINER_IMAGE: backend
 
 jobs:
