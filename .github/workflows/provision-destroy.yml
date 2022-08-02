@@ -6,8 +6,8 @@ on:
 
 env:
   AZURE_RESOURCE_GROUP: alius-probatio-rg
-  AZURE_APP_PLAN: fortune-cookie
   AZURE_LOCATION: '"East Norway"'
+  AZURE_APP_PLAN: fortune-cookie
   AZURE_WEBAPP_NAME: fortune-cookie-app
 
 jobs:
@@ -38,12 +38,7 @@ jobs:
       - name: Create webapp resource
         if: success()
         run: |
-          az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }} --multicontainer-config-type compose --multicontainer-config-file compose.yml
-
-      - name: Configure webapp to use GitHub Packages
-        if: success()
-        run: |
-          az webapp config container set --multicontainer-config-file compose.yml --multicontainer-config-type compose --docker-registry-server-password ${{secrets.GITHUB_TOKEN}} --docker-registry-server-url https://docker.pkg.github.com --docker-registry-server-user ${{github.actor}} --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }} 
 
   destroy-azure-resources:
     runs-on: ubuntu-latest

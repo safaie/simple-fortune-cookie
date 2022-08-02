@@ -20,24 +20,32 @@ jobs:
     name: Deploy app container to Azure
       
     steps:
-      - name: "Login via Azure CLI"
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Azure login
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - uses: azure/docker-login@v1
-        with:
-          login-server: ${{env.IMAGE_REGISTRY_URL}}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Configure webapp to use GitHub Packages
+        if: success()
+        run: |
+          az webapp config container set --multicontainer-config-file compose.yml --multicontainer-config-type compose --docker-registry-server-password ${{secrets.GITHUB_TOKEN}} --docker-registry-server-url https://${{ IMAGE_REGISTRY_URL }} --docker-registry-server-user ${{github.actor}} --name ${{ env.AZURE_WEBAPP_NAME }} --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
 
-      - name: Deploy web app container
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{env.AZURE_WEBAPP_NAME}}
-          images: |
-            ${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.BACKEND_IMAGE_NAME}}:latest
-            ${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.FRONTEND_IMAGE_NAME}}:latest
+#      - uses: azure/docker-login@v1
+#        with:
+#          login-server: ${{env.IMAGE_REGISTRY_URL}}
+#          username: ${{ github.actor }}
+#          password: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: Deploy web app container
+#        uses: azure/webapps-deploy@v2
+#        with:
+#          app-name: ${{env.AZURE_WEBAPP_NAME}}
+#          images: |
+#            ${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.BACKEND_IMAGE_NAME}}:latest
+#            ${{env.IMAGE_REGISTRY_URL}}/${{ github.repository }}/${{env.FRONTEND_IMAGE_NAME}}:latest
 
       - name: Azure logout
         run: |
