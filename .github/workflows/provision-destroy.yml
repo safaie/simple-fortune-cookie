@@ -7,7 +7,7 @@ on:
 env:
   AZURE_RESOURCE_GROUP: alius-probatio-rg
   AZURE_APP_PLAN: devops-academy
-  AZURE_LOCATION: '"West Europe"'
+  AZURE_LOCATION: '"East Norway"'
   AZURE_WEBAPP_NAME: devops-academy-app
   CONTAINER_IMAGE: backend
 
@@ -34,7 +34,7 @@ jobs:
       - name: Create Azure app service plan
         if: success()
         run: |
-          az appservice plan create --resource-group ${{env.AZURE_RESOURCE_GROUP}} --name ${{env.AZURE_APP_PLAN}} --is-linux --sku F1 --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
+          az appservice plan create --resource-group ${{env.AZURE_RESOURCE_GROUP}} --name ${{env.AZURE_APP_PLAN}} --is-linux --sku B1 --subscription ${{secrets.AZURE_SUBSCRIPTION_ID}}
 
       - name: Create webapp resource
         if: success()
