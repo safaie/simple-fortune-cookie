@@ -1,4 +1,4 @@
-name: Configure Azure environment
+name: Azure Webapp Deployment
 
 on: 
   pull_request:
@@ -14,7 +14,7 @@ jobs:
   setup-up-azure-resources:
     runs-on: ubuntu-latest
 
-    if: contains(github.event.pull_request.labels.*.name, 'provision')
+    if: contains(github.event.pull_request.labels.*.name, 'webapp deploy')
 
     steps:
       - name: Checkout repository
@@ -48,7 +48,7 @@ jobs:
   destroy-azure-resources:
     runs-on: ubuntu-latest
 
-    if: contains(github.event.pull_request.labels.*.name, 'destroy')
+    if: contains(github.event.pull_request.labels.*.name, 'webapp destroy')
 
     steps:
       - name: Checkout repository
