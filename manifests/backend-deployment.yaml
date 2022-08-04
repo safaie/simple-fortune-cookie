@@ -23,6 +23,8 @@ spec:
       labels:
         io.kompose.service: backend
     spec:
+      nodeSelector:
+        agentpool: linux
       containers:
         - image: ghcr.io/safaie/backend:latest
           name: backend
