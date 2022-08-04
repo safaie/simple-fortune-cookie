@@ -52,10 +52,10 @@ jobs:
         with:
            action: deploy
            manifests: |
-              manifests/backend-deployment.yaml
-              manifests/backend-service.yaml
-              manifests/frontend-deployment.yaml
-              manifests/frontend-service.yaml
+             manifests/backend-deployment.yaml
+             manifests/backend-service.yaml
+             manifests/frontend-deployment.yaml
+             manifests/frontend-service.yaml
            images: |
               ghcr.io/safaie/backend:latest
               ghcr.io/safaie/frontend:latest
