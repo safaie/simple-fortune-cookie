@@ -1,0 +1,30 @@
+name: EKS Kubernetes Deployment
+
+on: 
+  pull_request:
+    types: [labeled]
+
+env:
+  EKS_NAMESPACE: student60
+  IMAGE_REGISTRY_URL: docker.pkg.github.com
+
+jobs:
+
+  Deploy-to-EKS:
+
+    if: contains(github.event.pull_request.labels.*.name, 'eks deploy')
+
+    runs-on: self-hosted
+#    runs-on: ubuntu-latest
+    name: Deploy to EKS
+      
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Deploy to EKS
+        run: |
+          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/backend-deployment.yaml
+          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/backend-service.yaml
+          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/frontend-deployment.yaml
+          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/frontend-service.yaml
