@@ -7,7 +7,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: backend
-  name: backend
+  name: backend-service
 spec:
   ports:
     - name: "9000"
