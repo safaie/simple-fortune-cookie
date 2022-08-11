@@ -23,8 +23,8 @@ spec:
       labels:
         io.kompose.service: frontend
     spec:
-      nodeSelector:
-        agentpool: linux
+#      nodeSelector:
+#        agentpool: linux
       containers:
         - env:
             - name: BACKEND_DNS
