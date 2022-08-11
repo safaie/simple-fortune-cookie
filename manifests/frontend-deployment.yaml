@@ -34,5 +34,5 @@ spec:
           - name: BACKEND_DNS
             value: backend-service
         resources: {}
-        restartPolicy: Always
+      restartPolicy: Always
 status: {}
