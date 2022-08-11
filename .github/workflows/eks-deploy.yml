@@ -14,17 +14,17 @@ jobs:
 
     if: contains(github.event.pull_request.labels.*.name, 'eks deploy')
 
-    runs-on: self-hosted
-#    runs-on: ubuntu-latest
+#    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Deploy to EKS
       
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Deploy to EKS
-        run: |
-          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/backend-deployment.yaml
-          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/backend-service.yaml
-          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/frontend-deployment.yaml
-          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/frontend-service.yaml
+#      - name: Deploy to EKS
+#        run: |
+#          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/backend-deployment.yaml
+#          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/backend-service.yaml
+#          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/frontend-deployment.yaml
+#          kubectl -n ${{ env.EKS_NAMESPACE }} apply -f manifests/frontend-service.yaml
