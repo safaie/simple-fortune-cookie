@@ -31,6 +31,7 @@ jobs:
         cd frontend
         go build -v
     
+# Test frontend
     - name: Test
       run: |
         cd frontend
