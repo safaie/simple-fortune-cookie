@@ -1,4 +1,3 @@
-[![Go](https://github.com/safaie/simple-fortune-cookie/actions/workflows/go.yml/badge.svg)](https://github.com/safaie/simple-fortune-cookie/actions/workflows/go.yml)
 
 # Simple Fortune Cookie
 
