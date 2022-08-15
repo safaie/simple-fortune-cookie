@@ -1,37 +1,39 @@
-## Welcome to GitHub Pages
+[![Go](https://github.com/safaie/simple-fortune-cookie/actions/workflows/go.yml/badge.svg)](https://github.com/safaie/simple-fortune-cookie/actions/workflows/go.yml)
 
-You can use the [editor on GitHub](https://github.com/safaie/simple-fortune-cookie/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Simple Fortune Cookie
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+A project in Go for you to apply all the awesome things
+    you've learned at the academy!
 
-### Markdown
+The project can be run by 1-3 people in a team.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Fork the Project
 
-```markdown
-Syntax highlighted code block
+Fork the project to get your own private working copy:
 
-# Header 1
-## Header 2
-### Header 3
+![Forking the Project](./images/forking-project.png)
 
-- Bulleted
-- List
+## Configuring the Project
 
-1. Numbered
-2. List
+Enable issues on the repository and invite the team as collaborators,
+    so you can make changes:
 
-**Bold** and _Italic_ and `Code` text
+![Configuring the Project](./images/settings-project.png)
 
-[Link](url) and ![Image](src)
-```
+When you have a fork that your teammates can access,
+please proceed to the [01-introduction](./01-introduction.md).
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+## Folders
 
-### Jekyll Themes
+- `backend`: a Go server that serves api requests
+- `frontend`: an HTTP webserver (in Go) that you can view in your browser
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/safaie/simple-fortune-cookie/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## Eficode Notes
 
-### Support or Contact
+This repository is entirely generated.
+Changes will be overwritten by subsequent releases,
+    from the main repository.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+In case of an unfortunate push,
+    simply make a new release from the main repository,
+    and squash the commits on this one.
