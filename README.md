@@ -1,4 +1,4 @@
-[![Go](https://github.com/safaie/simple-fortune-cookie/actions/workflows/go.yml/badge.svg)](https://github.com/safaie/simple-fortune-cookie/actions/workflows/go.yml)
+[![Continuous Integration](https://github.com/safaie/simple-fortune-cookie/actions/workflows/ci.yml/badge.svg)](https://github.com/safaie/simple-fortune-cookie/actions/workflows/ci.yml)
 
 # Simple Fortune Cookie
 
