@@ -21,6 +21,8 @@ spec:
           image: ghcr.io/safaie/frontend:latest
           ports:
             - containerPort: 8080
+              name: frontend
+              protocol: TCP
           env:
             - name: BACKEND_DNS
               value: backend

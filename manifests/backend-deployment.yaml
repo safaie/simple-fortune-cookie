@@ -17,10 +17,12 @@ spec:
       nodeSelector:
         agentpool: linux
       containers:
-        - image: ghcr.io/safaie/backend:latest
-          name: backend
+        - name: backend
+          image: ghcr.io/safaie/backend:latest
           ports:
             - containerPort: 9000
+              name: backend
+              protocol: TCP
           env:
             - name: REDIS_DNS
               value: redis
