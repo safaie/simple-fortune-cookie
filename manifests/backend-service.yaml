@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend
+  name: fortune-backend
   labels:
-    name: backend
+    name: fortune-backend
 spec:
   selector:
-    name: backend
+    name: fortune-backend
   ports:
     - port: 9000
       targetPort: 9000

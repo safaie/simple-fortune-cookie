@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend
+  name: frontend-svc
   labels:
-    name: frontend
+    name: frontend-svc
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: frontend
+      name: frontend-svc
   template:
     metadata:
       labels:
-        name: frontend
+        name: frontend-svc
     spec:
       nodeSelector:
         agentpool: linux
       containers:
-        - name: frontend
+        - name: frontend-svc
           image: ghcr.io/safaie/frontend:latest
           ports:
             - containerPort: 8080
-              name: frontend
+              name: frontend-svc
               protocol: TCP
           env:
             - name: BACKEND_DNS
-              value: backend
+              value: fortune-backend

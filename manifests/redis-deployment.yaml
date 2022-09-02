@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: redis
   labels:
-    app: redis
+    name: redis
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redis
+      name: redis
   template:
     metadata:
       labels:
-        app: redis
+        name: redis
     spec:
       nodeSelector:
         agentpool: linux

@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: fortune-backend
   labels:
-    name: backend
+    name: fortune-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: backend
+      name: fortune-backend
   template:
     metadata:
       labels:
-        name: backend
+        name: fortune-backend
     spec:
       nodeSelector:
         agentpool: linux
       containers:
-        - name: backend
+        - name: fortune-backend
           image: ghcr.io/safaie/backend:latest
           ports:
             - containerPort: 9000
-              name: backend
+              name: fortune-backend
               protocol: TCP
           env:
             - name: REDIS_DNS
