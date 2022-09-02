@@ -3,11 +3,12 @@ kind: Service
 metadata:
   name: fortune-backend
   labels:
-    name: fortune-backend
+    app: fortune-backend
 spec:
-  selector:
-    name: fortune-backend
-  ports:
-    - port: 9000
-      targetPort: 9000
   type: ClusterIP
+  ports:
+  - port: 9000
+    targetPort: 9000
+  selector:
+    app: fortune-backend
+

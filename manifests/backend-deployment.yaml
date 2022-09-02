@@ -3,26 +3,31 @@ kind: Deployment
 metadata:
   name: fortune-backend
   labels:
-    name: fortune-backend
+    app: fortune-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: fortune-backend
+      app: fortune-backend
   template:
     metadata:
       labels:
-        name: fortune-backend
+        app: fortune-backend
     spec:
       nodeSelector:
         agentpool: linux
       containers:
-        - name: fortune-backend
-          image: ghcr.io/safaie/backend:latest
-          ports:
-            - containerPort: 9000
-              name: fortune-backend
-              protocol: TCP
-          env:
-            - name: REDIS_DNS
-              value: redis
+      - name: fortune-backend
+        env:
+          - name: REDIS_DNS
+            value: redis
+        image: ghcr.io/safaie/backend:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9000
+          name: fortune-backend
+          protocol: TCP
+

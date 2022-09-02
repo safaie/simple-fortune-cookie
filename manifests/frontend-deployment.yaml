@@ -1,28 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-svc
+  name: sfc-frontend
   labels:
-    name: frontend-svc
+    app: sfc-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: frontend-svc
+      app: sfc-frontend
   template:
     metadata:
       labels:
-        name: frontend-svc
+        app: sfc-frontend
     spec:
       nodeSelector:
         agentpool: linux
       containers:
-        - name: frontend-svc
-          image: ghcr.io/safaie/frontend:latest
-          ports:
-            - containerPort: 8080
-              name: frontend-svc
-              protocol: TCP
-          env:
-            - name: BACKEND_DNS
-              value: fortune-backend
+      - name: sfc-frontend
+        env:
+          - name: BACKEND_DNS
+            value: fortune-backend
+        image: ghcr.io/safaie/frontend:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+          name: sfc-frontend
+          protocol: TCP
+
