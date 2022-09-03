@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sfc-frontend
+  name: fortune-frontend
   labels:
-    app: sfc-frontend
+    app: fortune-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: sfc-frontend
+      app: fortune-frontend
   template:
     metadata:
       labels:
-        app: sfc-frontend
+        app: fortune-frontend
     spec:
       nodeSelector:
         agentpool: linux
       containers:
-      - name: sfc-frontend
+      - name: fortune-frontend
         env:
           - name: BACKEND_DNS
             value: fortune-backend
@@ -28,6 +28,6 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 8080
-          name: sfc-frontend
+          name: fortune-frontend
           protocol: TCP
 

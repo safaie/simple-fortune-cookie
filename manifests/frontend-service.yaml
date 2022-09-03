@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: sfc-frontend
+  name: fortune-frontend
   labels:
-    app: sfc-frontend
+    app: fortune-frontend
 spec:
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: sfc-frontend
+    app: fortune-frontend
 

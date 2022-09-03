@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-master
+  name: fortune-redis
   labels:
     app: redis
 spec:
@@ -17,7 +17,7 @@ spec:
       nodeSelector:
         agentpool: linux
       containers:
-      - name: master
+      - name: redis
         image: redis:7.0-alpine
         resources:
           requests:
