@@ -20,7 +20,7 @@ spec:
       - name: cookie-backend
         env:
           - name: REDIS_DNS
-            value: cookie-redis
+            value: redis
         image: ghcr.io/safaie/backend:latest
         resources:
           limits:
