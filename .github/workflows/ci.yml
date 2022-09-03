@@ -10,8 +10,8 @@ on:
 jobs:
 
   build:
-#    runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+#    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
 
@@ -55,8 +55,8 @@ jobs:
     
   containerization:
     needs: build
-#    runs-on: ubuntu-latest
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
+#    runs-on: self-hosted
     
     steps:
     - uses: actions/checkout@v3

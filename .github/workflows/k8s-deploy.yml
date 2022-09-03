@@ -54,11 +54,13 @@ jobs:
            namespace: ${{ env.AKS_NAMESPACE }}
            strategy: basic
            manifests: |
-             manifests/release.yaml
-#             manifests/backend-deployment.yaml
-#             manifests/backend-service.yaml
-#             manifests/frontend-deployment.yaml
-#             manifests/frontend-service.yaml
+             manifests/backend-deployment.yaml
+             manifests/frontend-deployment.yaml
+             manifests/redis-deployment.yaml
+             manifests/backend-service.yaml
+             manifests/frontend-service.yaml
+             manifests/redis-service.yaml
+#             manifests/release.yaml
            images: |
               ghcr.io/safaie/backend:latest
               ghcr.io/safaie/frontend:latest

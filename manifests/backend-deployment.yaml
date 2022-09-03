@@ -1,35 +1,33 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert -f compose.yml
-    kompose.version: 1.26.1 (a9d05d509)
-  creationTimestamp: null
+  name: fortune-backend
   labels:
-    io.kompose.service: backend
-  name: backend
+    app: fortune-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: backend
-  strategy: {}
+      app: fortune-backend
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert -f compose.yml
-        kompose.version: 1.26.1 (a9d05d509)
-      creationTimestamp: null
       labels:
-        io.kompose.service: backend
+        app: fortune-backend
     spec:
       nodeSelector:
         agentpool: linux
       containers:
-        - image: ghcr.io/safaie/backend:latest
-          name: backend
-          ports:
-            - containerPort: 9000
-          resources: {}
-      restartPolicy: Always
-status: {}
+      - name: fortune-backend
+        env:
+          - name: REDIS_DNS
+            value: redis
+        image: ghcr.io/safaie/backend:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 9000
+          name: fortune-backend
+          protocol: TCP
+
