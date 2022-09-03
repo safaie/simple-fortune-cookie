@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fortune-backend
+  name: cookie-backend
   labels:
-    app: fortune-backend
+    app: cookie-backend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fortune-backend
+      app: cookie-backend
   template:
     metadata:
       labels:
-        app: fortune-backend
+        app: cookie-backend
     spec:
       nodeSelector:
         agentpool: linux
       containers:
-      - name: fortune-backend
+      - name: cookie-backend
         env:
           - name: REDIS_DNS
             value: redis
@@ -28,6 +28,6 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 9000
-          name: fortune-backend
+          name: cookie-backend
           protocol: TCP
 

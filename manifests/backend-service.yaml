@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: fortune-backend
+  name: cookie-backend
   labels:
-    app: fortune-backend
+    app: cookie-backend
 spec:
   type: ClusterIP
   ports:
   - port: 9000
     targetPort: 9000
   selector:
-    app: fortune-backend
+    app: cookie-backend
 

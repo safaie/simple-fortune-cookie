@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fortune-frontend
+  name: cookie-frontend
   labels:
-    app: fortune-frontend
+    app: cookie-frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: fortune-frontend
+      app: cookie-frontend
   template:
     metadata:
       labels:
-        app: fortune-frontend
+        app: cookie-frontend
     spec:
       nodeSelector:
         agentpool: linux
       containers:
-      - name: fortune-frontend
+      - name: cookie-frontend
         env:
           - name: BACKEND_DNS
-            value: fortune-backend
+            value: cookie-backend
         image: ghcr.io/safaie/frontend:latest
         resources:
           limits:
@@ -28,6 +28,6 @@ spec:
             cpu: "500m"
         ports:
         - containerPort: 8080
-          name: fortune-frontend
+          name: cookie-frontend
           protocol: TCP
 
