@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis
+  name: cookie-redis
   labels:
-    app: redis
+    app: cookie-redis
 spec:
   ports:
   - port: 6379
     targetPort: 6379
   selector:
-    app: redis
+    app: cookie-redis
 

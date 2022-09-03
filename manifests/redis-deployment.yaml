@@ -3,21 +3,21 @@ kind: Deployment
 metadata:
   name: cookie-redis
   labels:
-    app: redis
+    app: cookie-redis
 spec:
   selector:
     matchLabels:
-      app: redis
+      app: cookie-redis
   replicas: 1        
   template:          
     metadata:
       labels:
-        app: redis
+        app: cookie-redis
     spec:
       nodeSelector:
         agentpool: linux
       containers:
-      - name: redis
+      - name: cookie-redis
         image: redis:7.0-alpine
         resources:
           requests:
