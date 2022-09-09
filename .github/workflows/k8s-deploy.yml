@@ -10,6 +10,7 @@ env:
   AKS_CLUSTER_VERSION: 'v1.23.5'
   AKS_NAMESPACE: fortune-cookie
   IMAGE_REGISTRY_URL: docker.pkg.github.com
+  IMAGE_TAG: "0.1.0"
 
 jobs:
 
@@ -62,8 +63,8 @@ jobs:
              manifests/redis-service.yaml
 #             manifests/release.yaml
            images: |
-              ghcr.io/safaie/backend:latest
-              ghcr.io/safaie/frontend:latest
+              ghcr.io/safaie/backend:${{ env.IMAGE_TAG }}
+              ghcr.io/safaie/frontend:${{ env.IMAGE_TAG }}
            imagepullsecrets: |
               cr-k8s-secret
 
