@@ -11,7 +11,7 @@ spec:
       port:
         number: 80
   rules:
-  - host: www.aliusprobatio.com
+  - host: <domain_name>
     http:
       paths:
       - path: /
