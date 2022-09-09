@@ -68,6 +68,8 @@ jobs:
     - name: Download Artifacts
       uses: actions/download-artifact@v3.0.0
 
+## Option 1: build, scan, and push the container image
+
     - name: Build Backend Image
       run: |
         cd backend
@@ -103,6 +105,8 @@ jobs:
 
     - name: Upload Frontend Image
       run: docker push ${{ env.CONTAINER_REGISTRY }}/frontend:${{ env.IMAGE_TAG }}
+
+## Option 2: build, and push the container image without scanning
 
 #    - name: Login to GitHub Container Registry
 #      uses: docker/login-action@v2
