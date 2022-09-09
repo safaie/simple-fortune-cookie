@@ -20,7 +20,10 @@ spec:
       - name: sfc-frontend
         env:
           - name: BACKEND_DNS
-            value: fortune-backend
+            valueFrom:
+              configMapKeyRef:
+                name: simple-fortune-config
+                key: backend.dns
         image: ghcr.io/safaie/frontend:latest
         resources:
           limits:

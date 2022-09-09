@@ -20,7 +20,10 @@ spec:
       - name: fortune-backend
         env:
           - name: REDIS_DNS
-            value: redis
+            valueFrom:
+              configMapKeyRef:
+                name: simple-fortune-config
+                key: redis.dns
         image: ghcr.io/safaie/backend:latest
         resources:
           limits:

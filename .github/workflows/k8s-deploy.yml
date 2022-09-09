@@ -55,6 +55,7 @@ jobs:
            namespace: ${{ env.AKS_NAMESPACE }}
            strategy: basic
            manifests: |
+             manifests/config.yaml
              manifests/backend-deployment.yaml
              manifests/frontend-deployment.yaml
              manifests/redis-deployment.yaml
