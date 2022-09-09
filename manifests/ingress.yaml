@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: fortune-ingress
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+spec:
+  defaultBackend:
+    service:
+      name: sfc-frontend
+      port:
+        number: 80
+  rules:
+  - host: 51.13.54.110
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sfc-frontend
+            port:
+              number: 80
+
+

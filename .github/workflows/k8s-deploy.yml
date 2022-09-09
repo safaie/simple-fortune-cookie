@@ -62,6 +62,7 @@ jobs:
              manifests/backend-service.yaml
              manifests/frontend-service.yaml
              manifests/redis-service.yaml
+             manifests/ingress.yaml
 #             manifests/release.yaml
            images: |
               ghcr.io/safaie/backend:${{ env.IMAGE_TAG }}
