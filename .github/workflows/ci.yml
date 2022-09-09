@@ -7,6 +7,9 @@ on:
     branches: [ "main" ]
 #  workflow_dispatch:
 
+env:
+  CONTAINER_REGISTRY: ghcr.io/safaie
+
 jobs:
 
   build:
@@ -64,32 +67,64 @@ jobs:
     - name: Download Artifacts
       uses: actions/download-artifact@v3.0.0
 
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v2
+    - name: Build Backend Image
+      run: |
+        cd backend
+        docker build . -t ${{ env.CONTAINER_REGISTRY }}/backend:${{ github.sha }}
+      
+    - name: Scan Backend Image
+      uses: Azure/container-scan@v0
       with:
-        registry: ghcr.io
+        image-name: ${{ env.CONTAINER_REGISTRY }}/backend:${{ github.sha }}
+    
+    - name: Build Frontend Image
+      run: |
+        cd frontend
+        docker build . -t ${{ env.CONTAINER_REGISTRY }}/frontend:${{ github.sha }}
+      
+    - name: Scan Frontend Image
+      uses: Azure/container-scan@v0
+      with:
+        image-name: ${{ env.CONTAINER_REGISTRY }}/frontend:${{ github.sha }}
+    
+    - uses: Azure/docker-login@v1
+      with:
+        login-server: ${{ env.CONTAINER_REGISTRY }}
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Upload Backend Image
+      run: docker push ${{ env.CONTAINER_REGISTRY }}/backend:${{ github.sha }}
 
-    - name: Build and Push Backend Container Image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: backend
-        registry: ghcr.io
-        dockerfile: backend/Dockerfile
-        directory: backend
-        tags: latest
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload Frontend Image
+      run: docker push ${{ env.CONTAINER_REGISTRY }}/frontend:${{ github.sha }}
 
-    - name: Build and Push Frontend Container Image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: frontend
-        registry: ghcr.io
-        dockerfile: frontend/Dockerfile
-        directory: frontend
-        tags: latest
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
+#    - name: Login to GitHub Container Registry
+#      uses: docker/login-action@v2
+#      with:
+#        registry: ghcr.io
+#        username: ${{ github.actor }}
+#        password: ${{ secrets.GITHUB_TOKEN }}
+#
+#    - name: Build and Push Backend Container Image
+#      uses: mr-smithers-excellent/docker-build-push@v5
+#      with:
+#        image: backend
+#        registry: ghcr.io
+#        dockerfile: backend/Dockerfile
+#        directory: backend
+#        tags: latest
+#        username: ${{ github.actor }}
+#        password: ${{ secrets.GITHUB_TOKEN }}
+#
+#    - name: Build and Push Frontend Container Image
+#      uses: mr-smithers-excellent/docker-build-push@v5
+#      with:
+#        image: frontend
+#        registry: ghcr.io
+#        dockerfile: frontend/Dockerfile
+#        directory: frontend
+#        tags: latest
+#        username: ${{ github.actor }}
+#        password: ${{ secrets.GITHUB_TOKEN }}
+#
