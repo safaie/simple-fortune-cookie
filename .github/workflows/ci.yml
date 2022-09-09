@@ -73,9 +73,11 @@ jobs:
         docker build . -t ${{ env.CONTAINER_REGISTRY }}/backend:${{ github.sha }}
       
     - name: Scan Backend Image
-      uses: Azure/container-scan@v0
+      uses: Azure/container-scan@v0.1
       with:
         image-name: ${{ env.CONTAINER_REGISTRY }}/backend:${{ github.sha }}
+        severity-threshold: CRITICAL
+        run-quality-checks: true
     
     - name: Build Frontend Image
       run: |
@@ -83,9 +85,11 @@ jobs:
         docker build . -t ${{ env.CONTAINER_REGISTRY }}/frontend:${{ github.sha }}
       
     - name: Scan Frontend Image
-      uses: Azure/container-scan@v0
+      uses: Azure/container-scan@v0.1
       with:
         image-name: ${{ env.CONTAINER_REGISTRY }}/frontend:${{ github.sha }}
+        severity-threshold: CRITICAL
+        run-quality-checks: true
     
     - uses: Azure/docker-login@v1
       with:
