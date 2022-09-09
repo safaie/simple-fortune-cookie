@@ -83,14 +83,14 @@ jobs:
       with:
         image-name: ${{ env.CONTAINER_REGISTRY }}/backend:${{ env.IMAGE_TAG }}
         severity-threshold: CRITICAL
-        run-quality-checks: true
+        run-quality-checks: false
     
     - name: Scan Frontend Image
       uses: Azure/container-scan@v0.1
       with:
         image-name: ${{ env.CONTAINER_REGISTRY }}/frontend:${{ env.IMAGE_TAG }}
         severity-threshold: CRITICAL
-        run-quality-checks: true
+        run-quality-checks: false
     
     - uses: Azure/docker-login@v1
       with:
